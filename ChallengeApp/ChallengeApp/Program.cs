@@ -2,21 +2,19 @@
 {
     private static void Main(string[] args)
     {
-        string name = "Dominik";
-        int age = 17;
-        char sex = 'M';
+        int number = 198843292;
+        List<int> numbers = new List<int> { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
-        if (age < 30 && sex == 'K')
+        foreach (var num in number.ToString())
         {
-            Console.WriteLine("Kobieta poniżej 30 lat");
+            numbers[(int)Char.GetNumericValue(num)]++;
         }
-        else if (name == "Ewa" && age == 30)
+
+        Console.WriteLine("Statystyki cyfr dla liczby " + number + ":");
+
+        for (int i = 0; i < numbers.Count; i++)
         {
-            Console.WriteLine("Ewa. lat 30");
-        }
-        else if (age < 18 && sex == 'M')
-        {
-            Console.WriteLine("Niepełnoletni mężczyzna");
+            Console.WriteLine(i + " => " + numbers[i]);
         }
     }
 }
