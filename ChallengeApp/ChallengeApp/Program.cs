@@ -8,9 +8,9 @@ internal class Program
         Employee employee2 = new Employee("Zbigniew", "Nowak", 49);
         Employee employee3 = new Employee("Zbyszko", "Zawisza", 41);
 
-        employee1.AddScore([6, 5, 6, 9, 10]);
+        employee1.AddScores([6, 5, 6, 9, 10]);
 
-        employee2.AddScore([8, 2, 4, 9, 8]);
+        employee2.AddScores([8, 2, 4, 9, 8]);
 
         employee3.AddScore(6);
         employee3.AddScore(5);

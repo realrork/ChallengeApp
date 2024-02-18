@@ -28,12 +28,17 @@
             this.Points.Add(score);
         }
 
-        public void AddScore(int[] scores)
+        public void AddScores(int[] scores)
         {
             foreach (int score in scores)
             {
                 this.Points.Add(score);
             }            
+        }
+
+        public void AddPunishment(int punishment)
+        {
+            this.Points.Add(punishment * -1);
         }
     }
 }
