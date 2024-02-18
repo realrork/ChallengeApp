@@ -30,8 +30,10 @@ internal class Program
                 bestEmployee = employee;
             }
         }
-
-        Console.WriteLine($"Najlepszy pracownik to {bestEmployee.FirstName} {bestEmployee.LastName}, który w wieku {bestEmployee.Age} lat ma już {bestScore} punktów!");
+        if (bestEmployee != null)
+        {
+            Console.WriteLine($"Najlepszy pracownik to {bestEmployee.FirstName} {bestEmployee.LastName}, który w wieku {bestEmployee.Age} lat ma już {bestScore} punktów!");
+        }        
     }
 }
 
