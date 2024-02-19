@@ -3,41 +3,52 @@ namespace ChallengeApp.Tests
     public class Tests
     {
         [Test]
-        public void WhenEmployeeGetScores_ThenReturnCorrectSum()
+        public void WhenEmployeeGetScores_ThenReturnCorrectMin()
         {
-            var user = new Employee("Jan", "Kowalski", 33);
-            user.AddScore(4);
-            user.AddScore(2);
-            user.AddScore(10);
+            var user = new Employee("Jan", "Kowalski");
+            user.AddGrade(1.8f);
+            user.AddGrade(0.1f);
+            user.AddGrade(2);
+            user.AddGrade(8);
 
-            var result = user.Result;
 
-            Assert.AreEqual(16, result);
-        }
-        [Test]
-        public void WhenEmployeeGetScoresArray_ThenReturnCorrectSum()
-        {
-            var user = new Employee("Jan", "Kowalski", 33);
-            user.AddScores([5, 3, 5, 8]);
+            var result = user.GetStatistics().Min;
 
-            var result = user.Result;
-
-            Assert.AreEqual(21, result);
+            Assert.AreEqual(0.1f, result);
         }
 
         [Test]
-        public void WhenEmployeeGetScoresAndPunishment_ThenReturnCorrectSum()
+        public void WhenEmployeeGetScores_ThenReturnCorrectMax()
         {
-            var user = new Employee("Jan", "Kowalski", 33);
-            user.AddScore(5);
-            user.AddScore(10);
-            user.AddPunishment(2);
-            user.AddPunishment(7);
+            var user = new Employee("Jan", "Kowalski");
+            user.AddGrades([3.5f, 4.5f, 9, 9.9f]);
 
-            var result = user.Result;
 
-            Assert.AreEqual(6, result);
+            var result = user.GetStatistics().Max;
 
+            Assert.AreEqual(9.9f, result);
+        }
+
+        [Test]
+        public void WhenEmployeeGetScores_ThenReturnIncorrectAverage()
+        {
+            var user = new Employee("Jan", "Kowalski");
+            user.AddGrades([5, 2, 3]);
+
+            var result = user.GetStatistics().Average;
+
+            Assert.AreNotEqual(3.333f, result);
+        }
+
+        [Test]
+        public void WhenEmployeeGetScores_ThenReturnCorrectAverage()
+        {
+            var user = new Employee("Jan", "Kowalski");
+            user.AddGrades([5.4f, 2.3f, 6.9f, 2.3f]);
+
+            var result = user.GetStatistics().Average;
+
+            Assert.AreEqual(4.225f, result);
         }
     }
 }

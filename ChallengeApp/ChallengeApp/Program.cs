@@ -4,36 +4,11 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        Employee employee1 = new Employee("Jan", "Kowalski", 33);
-        Employee employee2 = new Employee("Zbigniew", "Nowak", 49);
-        Employee employee3 = new Employee("Zbyszko", "Zawisza", 41);
-
-        employee1.AddScores([6, 5, 6, 9, 10]);
-
-        employee2.AddScores([8, 2, 4, 9, 8]);
-
-        employee3.AddScore(6);
-        employee3.AddScore(5);
-        employee3.AddScore(2);
-        employee3.AddScore(10);
-        employee3.AddScore(7);
-
-        List<Employee> employees = new List<Employee> { employee1, employee2, employee3 };
-        int bestScore = 0;
-        Employee? bestEmployee = null;
-
-        foreach (var employee in employees)
-        {
-            if (employee.Result > bestScore)
-            {
-                bestScore = employee.Result;
-                bestEmployee = employee;
-            }
-        }
-        if (bestEmployee != null)
-        {
-            Console.WriteLine($"Najlepszy pracownik to {bestEmployee.FirstName} {bestEmployee.LastName}, który w wieku {bestEmployee.Age} lat ma już {bestScore} punktów!");
-        }        
+        var employee = new Employee("Dominik", "Jakiśtam");
+        employee.AddGrade(2);
+        employee.AddGrades([2, 5, 3]);
+        var statistics = employee.GetStatistics();
+        Console.WriteLine($"Min: {statistics.Min}; Max: {statistics.Max}; Average: {statistics.Average:N4}");
     }
 }
 
