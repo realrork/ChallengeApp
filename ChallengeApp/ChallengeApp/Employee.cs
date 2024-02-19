@@ -2,16 +2,16 @@
 {
     public class Employee
     {
+        private List<float> Grades = new List<float>();
         public Employee(string firstName, string lastName)
         {
             this.FirstName = firstName;
             this.LastName = lastName;
-            this.Grades = new List<float>();
         }
 
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
-        private List<float> Grades { get; set; }
+        
 
         public void AddGrade(float score)
         {
