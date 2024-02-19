@@ -2,7 +2,7 @@
 {
     public class Employee
     {
-        private List<float> Grades = new List<float>();
+        private List<float> grades = new List<float>();
         public Employee(string firstName, string lastName)
         {
             this.FirstName = firstName;
@@ -17,7 +17,7 @@
         {
             if (score >= 0 && score <= 100)
             {
-                Grades.Add(score);
+                grades.Add(score);
             }
             else
             {
@@ -66,14 +66,14 @@
             statistics.Max = float.MinValue;
             statistics.Min = float.MaxValue;
 
-            foreach (float grade in Grades)
+            foreach (float grade in grades)
             {
                 statistics.Max = Math.Max(statistics.Max, grade);
                 statistics.Min = Math.Min(statistics.Min, grade);
                 statistics.Average += grade;
             }
 
-            statistics.Average /= Grades.Count;
+            statistics.Average /= grades.Count;
 
             return statistics;
         }
