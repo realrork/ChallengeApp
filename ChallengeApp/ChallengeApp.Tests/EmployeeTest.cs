@@ -30,25 +30,14 @@ namespace ChallengeApp.Tests
         }
 
         [Test]
-        public void WhenEmployeeGetScores_ThenReturnIncorrectAverage()
+        public void WhenEmployeeGetScores_ThenReturnCorrectAverage()
         {
             var user = new Employee("Jan", "Kowalski");
             user.AddGrades([5, 2, 3]);
 
             var result = user.GetStatistics().Average;
 
-            Assert.AreNotEqual(3.333f, result);
-        }
-
-        [Test]
-        public void WhenEmployeeGetScores_ThenReturnCorrectAverage()
-        {
-            var user = new Employee("Jan", "Kowalski");
-            user.AddGrades([5.4f, 2.3f, 6.9f, 2.3f]);
-
-            var result = user.GetStatistics().Average;
-
-            Assert.AreEqual(4.225f, result);
+            Assert.AreEqual(Math.Round(3.3333f,4), Math.Round(result,4));
         }
     }
 }

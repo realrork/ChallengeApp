@@ -15,15 +15,48 @@
 
         public void AddGrade(float score)
         {
-            this.Grades.Add(score);
+            if (score >= 0 && score <= 100)
+            {
+                Grades.Add(score);
+            }
+            else
+            {
+                Console.WriteLine($"Score {score} is invalid input!");
+            }
         }
 
-        public void AddGrades(float[] scores)
+        public void AddGrade(char score)
         {
-            foreach (float score in scores)
+            if (float.TryParse($"{score}", out float result))
             {
-                this.Grades.Add(score);
-            }            
+                AddGrade(result);
+            }
+            else
+            {
+                Console.WriteLine($"Char '{score}' is not float number!");
+            }
+        }
+
+        public void AddGrade(double score)
+        {
+            AddGrade((float)score);
+        }
+
+        public void AddGrade(decimal score)
+        {
+            AddGrade((float)score);
+        }
+
+        public void AddGrade(string score)
+        {
+            if (float.TryParse(score, out float result))
+            {
+                AddGrade(result);
+            }
+            else
+            {
+                Console.WriteLine($"String \"{score}\" is not float number!");
+            }
         }
 
         public Statistics GetStatistics()
@@ -33,17 +66,17 @@
             statistics.Max = float.MinValue;
             statistics.Min = float.MaxValue;
 
-            foreach(float grade in this.Grades)
+            foreach (float grade in Grades)
             {
                 statistics.Max = Math.Max(statistics.Max, grade);
                 statistics.Min = Math.Min(statistics.Min, grade);
                 statistics.Average += grade;
             }
 
-            statistics.Average /= this.Grades.Count;
+            statistics.Average /= Grades.Count;
 
             return statistics;
         }
-        
+
     }
 }
