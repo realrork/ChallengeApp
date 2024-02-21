@@ -3,6 +3,7 @@
     public class Employee
     {
         private List<float> grades = new List<float>();
+
         public Employee(string firstName, string lastName)
         {
             this.FirstName = firstName;
@@ -23,7 +24,7 @@
             }
             else
             {
-                Console.WriteLine($"Grade {score} has invalid value!");
+                throw new Exception("Score value is out of range!");
             }
         }
 
@@ -59,13 +60,12 @@
                         AddGrade(20);
                         break;
                     default:
-                        Console.WriteLine($"Grade '{score}' is not valid grade!");
-                        break;
+                        throw new Exception("Score letter is invalid!");
                 }
             }
         }
 
-        public int GetGradeCount()
+        public int GetGradesCount()
         {
             return grades.Count;
         }
@@ -77,15 +77,15 @@
             statistics.Max = float.MinValue;
             statistics.Min = float.MaxValue;
 
-            foreach (float grade in grades)
-            {
-                statistics.Max = Math.Max(statistics.Max, grade);
-                statistics.Min = Math.Min(statistics.Min, grade);
-                statistics.Average += grade;
-            }
-
             if (grades.Count != 0)
             {
+                foreach (float grade in grades)
+                {
+                    statistics.Max = Math.Max(statistics.Max, grade);
+                    statistics.Min = Math.Min(statistics.Min, grade);
+                    statistics.Average += grade;
+                }
+
                 statistics.Average /= grades.Count;
             }
 

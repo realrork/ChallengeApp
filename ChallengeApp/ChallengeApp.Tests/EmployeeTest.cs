@@ -1,4 +1,6 @@
+using Newtonsoft.Json.Linq;
 using System.Diagnostics;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace ChallengeApp.Tests
 {
@@ -66,30 +68,33 @@ namespace ChallengeApp.Tests
         }
 
         [Test]
-        public void WhenInsertedInvalidScores_ThenReturnCorrectStatistics()
+        public void WhenInsertedIncorrectValue_THenExceptionIsThrown()
         {
             var user = new Employee();
-            user.AddGrade("J");
-            user.AddGrade("A");
-            user.AddGrade("B");
-            user.AddGrade(".");
-            user.AddGrade("C");
-            user.AddGrade("C22");
-            user.AddGrade(1000);
-            user.AddGrade(-100);
-            user.AddGrade(20);
+            try
+            {
+                user.AddGrade(666);
+                Assert.Fail("An exception not thrown!");
+            }
+            catch(Exception ex)
+            {
+                Assert.AreEqual("Score value is out of range!", ex.Message);
+            }
+        }
 
-
-            var resultAvg = user.GetStatistics().Average;
-            var resultLetterAvg = user.GetStatistics().AverageLetter;
-            var resultMin = user.GetStatistics().Min;
-            var resultMax = user.GetStatistics().Max;
-
-
-            Assert.AreEqual(65, resultAvg);
-            Assert.AreEqual('B', resultLetterAvg);
-            Assert.AreEqual(100, resultMax);
-            Assert.AreEqual(20, resultMin);
+        [Test]
+        public void WhenInsertedIncorrectScore_THenExceptionIsThrown()
+        {
+            var user = new Employee();
+            try
+            {
+                user.AddGrade("J");
+                Assert.Fail("An exception not thrown!");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("Score letter is invalid!", ex.Message);
+            }
         }
     }
 }
