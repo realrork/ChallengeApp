@@ -40,23 +40,23 @@
                 {
                     case "a":
                     case "A":
-                        grades.Add(100);
+                        AddGrade(100);
                         break;
                     case "b":
                     case "B":
-                        grades.Add(80);
+                        AddGrade(80);
                         break;
                     case "c":
                     case "C":
-                        grades.Add(60);
+                        AddGrade(60);
                         break;
                     case "d":
                     case "D":
-                        grades.Add(40);
+                        AddGrade(40);
                         break;
                     case "e":
                     case "E":
-                        grades.Add(20);
+                        AddGrade(20);
                         break;
                     default:
                         Console.WriteLine($"Grade '{score}' is not valid grade!");
