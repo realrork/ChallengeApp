@@ -33,7 +33,7 @@ internal class Program
         }
 
         var statistics = employee.GetStatistics();
-        Console.WriteLine($"\nWprowadzono oceny w ilości {employee.GetGradesCount()}. A oto uzyskane statystyki:");
+        Console.WriteLine($"\nWprowadzono oceny w ilości {employee.GetGradesCount()}. A oto uzyskane statystyki dla obiektu '{employee.EmployeeId}':");
         Console.WriteLine($"Min: {statistics.Min}; Max: {statistics.Max}; Average: {Math.Round(statistics.Average, 4)} with Letter {statistics.AverageLetter}");
     }
 }
