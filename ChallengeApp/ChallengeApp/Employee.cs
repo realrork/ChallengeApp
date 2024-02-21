@@ -9,11 +9,7 @@
             this.LastName = lastName;
         }
 
-        public Employee()
-        {
-            //this.FirstName = "John";
-            //this.LastName = "Doe";
-        }
+        public Employee() { }
 
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
