@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace ChallengeApp
+﻿namespace ChallengeApp
 {
     public class Employee
     {
@@ -9,6 +7,12 @@ namespace ChallengeApp
         {
             this.FirstName = firstName;
             this.LastName = lastName;
+        }
+
+        public Employee()
+        {
+            //this.FirstName = "John";
+            //this.LastName = "Doe";
         }
 
         public string FirstName { get; private set; }
@@ -23,45 +27,54 @@ namespace ChallengeApp
             }
             else
             {
-                Console.WriteLine($"Score {score} is invalid input!");
+                Console.WriteLine($"Grade {score} has invalid value!");
             }
-        }
-
-        public void AddGrade(char score)
-        {
-            if (float.TryParse($"{score}", out float result))
-            {
-                AddGrade(result);
-            }
-            else
-            {
-                Console.WriteLine($"Char '{score}' is not float number!");
-            }
-        }
-
-        public void AddGrade(double score)
-        {
-            AddGrade((float)score);
-        }
-
-        public void AddGrade(decimal score)
-        {
-            AddGrade((float)score);
         }
 
         public void AddGrade(string score)
         {
+
             if (float.TryParse(score, out float result))
             {
                 AddGrade(result);
             }
             else
             {
-                Console.WriteLine($"String \"{score}\" is not float number!");
+                switch (score)
+                {
+                    case "a":
+                    case "A":
+                        grades.Add(100);
+                        break;
+                    case "b":
+                    case "B":
+                        grades.Add(80);
+                        break;
+                    case "c":
+                    case "C":
+                        grades.Add(60);
+                        break;
+                    case "d":
+                    case "D":
+                        grades.Add(40);
+                        break;
+                    case "e":
+                    case "E":
+                        grades.Add(20);
+                        break;
+                    default:
+                        Console.WriteLine($"Grade '{score}' is not valid grade!");
+                        break;
+                }
             }
         }
 
-        public Statistics GetStatisticsWithForEach()
+        public int GetGradeCount()
+        {
+            return grades.Count;
+        }
+
+        public Statistics GetStatistics()
         {
             var statistics = new Statistics();
             statistics.Average = 0;
@@ -75,70 +88,29 @@ namespace ChallengeApp
                 statistics.Average += grade;
             }
 
-            statistics.Average /= grades.Count;
-
-            return statistics;
-        }
-
-        public Statistics GetStatisticsWithFor()
-        {
-            var statistics = new Statistics();
-            statistics.Average = 0;
-            statistics.Max = float.MinValue;
-            statistics.Min = float.MaxValue;
-
-            for (int i = 0; i < grades.Count; i++)
+            if (grades.Count != 0)
             {
-                statistics.Max = Math.Max(statistics.Max, grades[i]);
-                statistics.Min = Math.Min(statistics.Min, grades[i]);
-                statistics.Average += grades[i];
+                statistics.Average /= grades.Count;
             }
 
-            statistics.Average /= grades.Count;
-
-            return statistics;
-        }
-
-        public Statistics GetStatisticsWithDoWhile()
-        {
-            var statistics = new Statistics();
-            statistics.Average = 0;
-            statistics.Max = float.MinValue;
-            statistics.Min = float.MaxValue;
-
-            int index = 0;
-
-            do
+            switch (statistics.Average)
             {
-                statistics.Max = Math.Max(statistics.Max, grades[index]);
-                statistics.Min = Math.Min(statistics.Min, grades[index]);
-                statistics.Average += grades[index];
-                index++;
-            } while (index < grades.Count);
-
-            statistics.Average /= grades.Count;
-
-            return statistics;
-        }
-
-        public Statistics GetStatisticsWithWhile()
-        {
-            var statistics = new Statistics();
-            statistics.Average = 0;
-            statistics.Max = float.MinValue;
-            statistics.Min = float.MaxValue;
-
-            int index = 0;
-
-            while (index < grades.Count)
-            {
-                statistics.Max = Math.Max(statistics.Max, grades[index]);
-                statistics.Min = Math.Min(statistics.Min, grades[index]);
-                statistics.Average += grades[index];
-                index++;
-            } 
-
-            statistics.Average /= grades.Count;
+                case var average when average >= 80:
+                    statistics.AverageLetter = 'A';
+                    break;
+                case var average when average >= 60:
+                    statistics.AverageLetter = 'B';
+                    break;
+                case var average when average >= 40:
+                    statistics.AverageLetter = 'C';
+                    break;
+                case var average when average >= 20:
+                    statistics.AverageLetter = 'D';
+                    break;
+                default:
+                    statistics.AverageLetter = 'E';
+                    break;
+            }
 
             return statistics;
         }

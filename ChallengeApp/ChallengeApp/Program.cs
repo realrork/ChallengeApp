@@ -4,28 +4,26 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        var employee = new Employee("Dominik", "Jakiśtam");
-        employee.AddGrade(5.5);
-        employee.AddGrade(7.7f);
-        employee.AddGrade(3.4m);
-        employee.AddGrade('9');
-        employee.AddGrade("100");
+        var employee = new Employee();
 
-        var statisticsWFE = employee.GetStatisticsWithForEach();
-        Console.WriteLine("Statystki wygenerowane przy pomocy pętli Foreach");
-        Console.WriteLine($"Min: {statisticsWFE.Min}; Max: {statisticsWFE.Max}; Average: {Math.Round(statisticsWFE.Average,4)}\n");
+        Console.WriteLine("Witamy w programie ROBOCEN do oceny pracowników.");
+        Console.WriteLine("Wprowadzaj kolejne oceny od 1 do 100 lub w postaci");
+        Console.WriteLine("liter od A do E. Naciśnięcie 'q' kończy wprowadzanie.");
+        Console.WriteLine("====================================================\n");
+        while (true)
+        {
+            Console.Write("Podaj ocenę pracownika: ");
+            var input = Console.ReadLine();
+            if (input == "q")
+            {
+                break;
+            }
+            employee.AddGrade(input);
+        }
 
-        var statisticsWF = employee.GetStatisticsWithFor();
-        Console.WriteLine("Statystki wygenerowane przy pomocy pętli For");
-        Console.WriteLine($"Min: {statisticsWF.Min}; Max: {statisticsWF.Max}; Average: {Math.Round(statisticsWF.Average, 4)}\n");
-
-        var statisticsWDW = employee.GetStatisticsWithDoWhile();
-        Console.WriteLine("Statystki wygenerowane przy pomocy pętli DoWhile");
-        Console.WriteLine($"Min: {statisticsWDW.Min}; Max: {statisticsWDW.Max}; Average: {Math.Round(statisticsWDW.Average, 4)}\n");
-
-        var statisticsWW = employee.GetStatisticsWithWhile();
-        Console.WriteLine("Statystki wygenerowane przy pomocy pętli While");
-        Console.WriteLine($"Min: {statisticsWW.Min}; Max: {statisticsWW.Max}; Average: {Math.Round(statisticsWW.Average, 4)}");
+        var statistics = employee.GetStatistics();
+        Console.WriteLine($"\nWprowadzono oceny w ilości {employee.GetGradeCount()}. A oto uzyskane statystyki:");
+        Console.WriteLine($"Min: {statistics.Min}; Max: {statistics.Max}; Average: {Math.Round(statistics.Average, 4)} with Letter {statistics.AverageLetter}");
     }
 }
 
