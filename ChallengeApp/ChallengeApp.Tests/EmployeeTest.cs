@@ -1,15 +1,11 @@
-using Newtonsoft.Json.Linq;
-using System.Diagnostics;
-using static System.Formats.Asn1.AsnWriter;
-
 namespace ChallengeApp.Tests
 {
-    public class Tests
+    public class EmployeeTests
     {
         [Test]
         public void WhenEnteredNumericalScores_ThenReturnCorrectStatistics()
         {
-            var user = new Employee("Jan", "Kowalski");
+            var user = new Employee("Jan", "Kowalski", 40);
             user.AddGrade(5);
             user.AddGrade(3.5f);
             user.AddGrade(1.5f);
@@ -80,6 +76,7 @@ namespace ChallengeApp.Tests
             {
                 Assert.AreEqual("Score value is out of range!", ex.Message);
             }
+            finally { }
         }
 
         [Test]
@@ -95,6 +92,7 @@ namespace ChallengeApp.Tests
             {
                 Assert.AreEqual("Score letter is invalid!", ex.Message);
             }
+            finally { }
         }
     }
 }

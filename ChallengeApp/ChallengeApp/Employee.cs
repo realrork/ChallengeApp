@@ -1,13 +1,16 @@
 ﻿namespace ChallengeApp
 {
-    public class Employee : Person
+    public class Employee : IEmployee
     {
         private List<float> grades = new List<float>();
 
-        public Employee(string firstName, string lastName, int age, char sex)
-            : base(firstName, lastName, age, sex)
+        public Employee(string firstName, string lastName, int age, char sex)            
         {
-            this.EmployeeId = Guid.NewGuid().ToString();
+            FirstName = firstName;
+            LastName = lastName;
+            Age = age;
+            Sex = sex;                
+            EmployeeId = Guid.NewGuid().ToString();
         }
 
         public Employee(string firstName, string lastName, int age) : this(firstName, lastName, age, 'N') { }
@@ -15,6 +18,10 @@
         public Employee() : this("John", "Doe", 33, 'M') { }
 
         public string EmployeeId { get; private set; }
+        public string FirstName { get; private set; }
+        public string LastName { get; private set; }
+        public int Age { get; private set; }
+        public char Sex { get; private set; }
 
         public void AddGrade(float score)
         {
@@ -37,6 +44,7 @@
             }
             else
             {
+
                 switch (score)
                 {
                     case "a":

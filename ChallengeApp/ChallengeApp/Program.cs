@@ -4,12 +4,13 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        var employee = new Employee();
+        var employee = new Supervisor();
+       
 
-        Console.WriteLine("Witamy w programie ROBOCEN do oceny pracowników.");
-        Console.WriteLine("Wprowadzaj kolejne oceny od 1 do 100 lub w postaci");
-        Console.WriteLine("liter od A do E. Naciśnięcie 'q' kończy wprowadzanie.");
-        Console.WriteLine("=====================================================\n");
+        Console.WriteLine("Witamy w programie ROBOCEN do oceny pracowników wyższego.");
+        Console.WriteLine("szczebla. Wprowadzaj kolejne oceny od 1 do 6, zmodyfikowane");
+        Console.WriteLine("plusem lub minusem. Naciśnięcie 'q' kończy wprowadzanie.");
+        Console.WriteLine("=============================================================\n");
         while (true)
         {
             Console.Write("Podaj ocenę pracownika: ");
@@ -34,7 +35,7 @@ internal class Program
 
         var statistics = employee.GetStatistics();
         Console.WriteLine($"\nWprowadzono oceny w ilości {employee.GetGradesCount()}. A oto uzyskane statystyki dla obiektu '{employee.EmployeeId}':");
-        Console.WriteLine($"Min: {statistics.Min}; Max: {statistics.Max}; Average: {Math.Round(statistics.Average, 4)} with Letter {statistics.AverageLetter}");
+        Console.WriteLine($"Min: {statistics.Min}; Max: {statistics.Max}; Average: {Math.Round(statistics.Average, 4)} with Letter \"{statistics.AverageLetter}\"");
     }
 }
 
