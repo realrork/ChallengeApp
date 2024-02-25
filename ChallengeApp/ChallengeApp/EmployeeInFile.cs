@@ -1,43 +1,20 @@
-﻿namespace ChallengeApp
+﻿using static System.Formats.Asn1.AsnWriter;
+
+namespace ChallengeApp
 {
-    public class Employee : IEmployee
+    public class EmployeeInFile : EmployeeBase
     {
-        private List<float> grades = new List<float>();
+        private const string fileName = "grades.txt";
 
-        public Employee(string firstName, string lastName, int age, char sex)            
+        public EmployeeInFile()
+            : this("John", "Doe", 33, 'N') { }
+        public EmployeeInFile(string firstName, string lastName, int age)
+            : this(firstName, lastName, age, 'N') { }
+        public EmployeeInFile(string firstName, string lastName, int age, char sex)
+            : base(firstName, lastName, age, sex) { }
+
+        public override void AddGrade(string score)
         {
-            FirstName = firstName;
-            LastName = lastName;
-            Age = age;
-            Sex = sex;                
-            EmployeeId = Guid.NewGuid().ToString();
-        }
-
-        public Employee(string firstName, string lastName, int age) : this(firstName, lastName, age, 'N') { }
-
-        public Employee() : this("John", "Doe", 33, 'M') { }
-
-        public string EmployeeId { get; private set; }
-        public string FirstName { get; private set; }
-        public string LastName { get; private set; }
-        public int Age { get; private set; }
-        public char Sex { get; private set; }
-
-        public void AddGrade(float score)
-        {
-            if (score >= 0 && score <= 100)
-            {
-                grades.Add(score);
-            }
-            else
-            {
-                throw new Exception("Score value is out of range!");
-            }
-        }
-
-        public void AddGrade(string score)
-        {
-
             if (float.TryParse(score, out float result))
             {
                 AddGrade(result);
@@ -73,17 +50,58 @@
             }
         }
 
-        public int GetGradesCount()
+        public override void AddGrade(float score)
         {
-            return grades.Count;
-        }
 
-        public Statistics GetStatistics()
+            if (score >= 0 && score <= 100)
+            {
+                using (var writer = File.AppendText(fileName))
+                {
+                    writer.WriteLine(score);
+                }
+            }
+            else
+            {
+                throw new Exception("Score value is out of range!");
+            }
+            
+        }    
+        
+        public override Statistics GetStatistics()
         {
-            var statistics = new Statistics();
+            List<float> grades = new List<float>();
+            var statistics = new Statistics();                   
+
+            if (File.Exists(fileName))
+            {
+                using (var reader = File.OpenText(fileName))
+                {
+                    var line = reader.ReadLine();
+                    while (line != null)
+                    {                        
+                        if (float.TryParse(line, out float result))
+                        {
+                            grades.Add(result);
+                        }
+                        else
+                        {
+                            throw new Exception("Bad value. File seems corrupted!");
+                        }
+                        line = reader.ReadLine();
+                    }
+                }
+            }
+            else
+            {
+                throw new Exception("File not found!");
+            }
+
+
+
             statistics.Average = 0;
             statistics.Max = float.MinValue;
             statistics.Min = float.MaxValue;
+            statistics.GradesCount = grades.Count;
 
             if (grades.Count != 0)
             {

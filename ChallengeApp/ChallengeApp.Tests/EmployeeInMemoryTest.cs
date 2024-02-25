@@ -1,11 +1,11 @@
 namespace ChallengeApp.Tests
 {
-    public class EmployeeTests
+    public class EmployeeInMemmoryTests
     {
         [Test]
         public void WhenEnteredNumericalScores_ThenReturnCorrectStatistics()
         {
-            var user = new Employee("Jan", "Kowalski", 40);
+            var user = new EmployeeInMemory("Jan", "Kowalski", 40);
             user.AddGrade(5);
             user.AddGrade(3.5f);
             user.AddGrade(1.5f);
@@ -14,16 +14,18 @@ namespace ChallengeApp.Tests
             var resultMin = user.GetStatistics().Min;
             var resultMax = user.GetStatistics().Max;
             var resultAvg = user.GetStatistics().Average;
+            var resultLetterAvg = user.GetStatistics().AverageLetter;
 
             Assert.AreEqual(1.5f, resultMin);
             Assert.AreEqual(5, resultMax);
             Assert.AreEqual(Math.Round(3.3333f, 4), Math.Round(resultAvg, 4));
+            Assert.AreEqual('E', resultLetterAvg);
         }
 
         [Test]
         public void WhenInsertedLetterScores_ThenReturnCorrectStatistics()
         {
-            var user = new Employee();
+            var user = new EmployeeInMemory();
             user.AddGrade("A");
             user.AddGrade("B");
             user.AddGrade("c");
@@ -43,7 +45,7 @@ namespace ChallengeApp.Tests
         [Test]
         public void WhenInsertedMixedScores_ThenReturnCorrectStatistics()
         {
-            var user = new Employee();
+            var user = new EmployeeInMemory();
             user.AddGrade("A");
             user.AddGrade(100);
             user.AddGrade("B");
@@ -66,7 +68,7 @@ namespace ChallengeApp.Tests
         [Test]
         public void WhenInsertedIncorrectValue_THenExceptionIsThrown()
         {
-            var user = new Employee();
+            var user = new EmployeeInMemory();
             try
             {
                 user.AddGrade(666);
@@ -82,7 +84,7 @@ namespace ChallengeApp.Tests
         [Test]
         public void WhenInsertedIncorrectScore_THenExceptionIsThrown()
         {
-            var user = new Employee();
+            var user = new EmployeeInMemory();
             try
             {
                 user.AddGrade("J");

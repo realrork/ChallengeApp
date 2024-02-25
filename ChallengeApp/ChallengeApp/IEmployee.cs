@@ -10,8 +10,6 @@
 
         Statistics GetStatistics();
         void AddGrade(string score);
-        void AddGrade(float score);
-        int GetGradesCount();
-        
+        void AddGrade(float score);        
     }
 }
