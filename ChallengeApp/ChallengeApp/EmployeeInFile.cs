@@ -11,43 +11,14 @@ namespace ChallengeApp
         public EmployeeInFile(string firstName, string lastName, int age)
             : this(firstName, lastName, age, 'N') { }
         public EmployeeInFile(string firstName, string lastName, int age, char sex)
-            : base(firstName, lastName, age, sex) { }
-
-        public override void AddGrade(string score)
+            : base(firstName, lastName, age, sex) 
         {
-            if (float.TryParse(score, out float result))
-            {
-                AddGrade(result);
-            }
-            else
-            {
+            base.GradeAdded += EmployeeInFileGradeAdded;
+        }
 
-                switch (score)
-                {
-                    case "a":
-                    case "A":
-                        AddGrade(100);
-                        break;
-                    case "b":
-                    case "B":
-                        AddGrade(80);
-                        break;
-                    case "c":
-                    case "C":
-                        AddGrade(60);
-                        break;
-                    case "d":
-                    case "D":
-                        AddGrade(40);
-                        break;
-                    case "e":
-                    case "E":
-                        AddGrade(20);
-                        break;
-                    default:
-                        throw new Exception("Score letter is invalid!");
-                }
-            }
+        private void EmployeeInFileGradeAdded(object sender, EventArgs args)
+        {
+            Console.WriteLine("to a file.");
         }
 
         public override void AddGrade(float score)
@@ -95,8 +66,6 @@ namespace ChallengeApp
             {
                 throw new Exception("File not found!");
             }
-
-
 
             statistics.Average = 0;
             statistics.Max = float.MinValue;

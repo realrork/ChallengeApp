@@ -6,7 +6,6 @@ internal class Program
     {
         var employee = new EmployeeInFile();
 
-
         Console.WriteLine("Witamy w programie ROBOCEN do oceny pracowników firmy.");
         //Console.WriteLine("szczebla. Wprowadzaj kolejne oceny od 1 do 6, zmodyfikowane");
         //Console.WriteLine("plusem lub minusem. Naciśnięcie 'q' kończy wprowadzanie.");
@@ -36,11 +35,12 @@ internal class Program
         var statistics = employee.GetStatistics();
 
         try
-        {            
+        {
             if (employee.GetType() == typeof(EmployeeInFile))
             {
                 Console.WriteLine($"\nZgromadzono łącznie oceny w ilości {statistics.GradesCount}. A oto uzyskane statystyki dla obiektu '{employee.EmployeeId}':");
-            } else if (employee.GetType() == typeof(EmployeeInMemory))
+            }
+            else if (employee.GetType() == typeof(EmployeeInMemory))
             {
                 Console.WriteLine($"\nWprowadzono oceny w ilości {statistics.GradesCount}. A oto uzyskane statystyki dla obiektu '{employee.EmployeeId}':");
             }
