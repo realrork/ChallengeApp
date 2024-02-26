@@ -3,7 +3,7 @@
     public abstract class EmployeeBase : IEmployee
     {
         public delegate void GradeAddedDelegate(object sender, EventArgs args);
-        public virtual event GradeAddedDelegate GradeAdded;
+        public abstract event GradeAddedDelegate GradeAdded;
 
         public EmployeeBase(string firstName, string lastName, int age, char sex)
         {
@@ -12,13 +12,10 @@
             Age = age;
             Sex = sex;
             EmployeeId = Guid.NewGuid().ToString();
-            GradeAdded += EmployeeBaseGradeAdded;
+            //GradeAdded += EmployeeBaseGradeAdded;
         }
 
-        private void EmployeeBaseGradeAdded(object sender, EventArgs args)
-        {
-            Console.Write("A new grade has been saved ");
-        }
+        //private void EmployeeBaseGradeAdded(object sender, EventArgs args) { }
 
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
@@ -26,12 +23,11 @@
         public char Sex { get; private set; }
         public string EmployeeId { get; private set; }
 
-
         public virtual void AddGrade(string score)
         {
             if (float.TryParse(score, out float result))
             {
-                AddGrade(result);                
+                AddGrade(result);
             }
             else
             {
@@ -60,10 +56,6 @@
                     default:
                         throw new Exception("Score letter is invalid!");
                 }
-            }
-            if (GradeAdded != null)
-            {
-                GradeAdded(this, EventArgs.Empty);
             }
         }
         public abstract void AddGrade(float score);
