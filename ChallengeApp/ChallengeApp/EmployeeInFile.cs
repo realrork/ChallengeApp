@@ -43,7 +43,7 @@ namespace ChallengeApp
 
         }
 
-        private List<float> getGradesFromFile(string fileName)
+        private List<float> GetGradesFromFile(string fileName)
         {
             List<float> grades = new List<float>();
             if (File.Exists(fileName))
@@ -74,7 +74,7 @@ namespace ChallengeApp
 
         public override Statistics GetStatistics()
         {
-            var grades = getGradesFromFile(fileName);
+            var grades = GetGradesFromFile(fileName);
 
             var statistics = new Statistics(grades);
 
